@@ -14,8 +14,34 @@ interface ExtWindow extends Window {
     app: Vue;
 }
 
+interface AppData {
+    loadingStatus: LoadingStatus;
+    queryUser: string;
+    users: User[];
+    allUsersVisible: boolean;
+    errorMessage: string | null;
+}
 
-(window as ExtWindow).app = new Vue<any>({
+interface AppMethods {
+    getFullName: (user: User) => string;
+    toggleUsers: () => void;
+}
+
+interface AppComputedProps {
+    hasUsers: boolean;
+    allUsersVisibleAndHasFoundUsers: boolean;
+    countAllUsers: number;
+    countFoundUsers: number;
+    foundUsers: User[];
+    isLoading: boolean;
+    isSuccess: boolean;
+    isFailed: boolean;
+    shouldShownUsers: boolean;
+    shouldShownError: boolean;
+}
+
+
+(window as ExtWindow).app = new Vue<AppData, AppMethods, AppComputedProps>({
     el: '#root',
     data: function() {
         return {
@@ -28,10 +54,10 @@ interface ExtWindow extends Window {
     },
     computed: {
         hasUsers: function() {
-            return !!this.users.length;
+            return !!this.countAllUsers;
         },
-        hasFoundUsers: function() {
-            return !!this.countFoundUsers;
+        allUsersVisibleAndHasFoundUsers: function() {
+            return this.allUsersVisible && !!this.countFoundUsers;
         },
         countAllUsers: function() {
             return this.users.length;

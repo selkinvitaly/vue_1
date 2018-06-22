@@ -13,30 +13,26 @@
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-md">
-                    <template v-if="shouldShownError">
-                        <div class="alert alert-danger" role="alert">
-                            {{errorMessage}}
-                        </div>
-                    </template>
-                    <template v-if="isLoading">
-                        <div class="progress">
-                            <div
-                                class="progress-bar progress-bar-striped progress-bar-animated"
-                                role="progressbar"
-                                aria-valuenow="100"
-                                aria-valuemin="0"
-                                aria-valuemax="100"
-                                style="width: 100%"
-                            ></div>
-                        </div>
-                    </template>
+                    <div v-if="shouldShownError" class="alert alert-danger" role="alert">
+                        {{errorMessage}}
+                    </div>
+                    <div v-if="isLoading" class="progress">
+                        <div
+                            class="progress-bar progress-bar-striped progress-bar-animated"
+                            role="progressbar"
+                            aria-valuenow="100"
+                            aria-valuemin="0"
+                            aria-valuemax="100"
+                            style="width: 100%"
+                        ></div>
+                    </div>
                 
                     <template v-if="shouldShownUsers">
                         <p class="lead">all users: <strong>{{countAllUsers}}</strong></p>
                         <p class="lead">search users: <strong>{{countFoundUsers}}</strong></p>
                         <input type="text" v-model="queryUser" />
 
-                        <div v-if="allUsersVisible && hasFoundUsers">
+                        <div v-if="allUsersVisibleAndHasFoundUsers">
                             <table class="table table-sm">
                                 <thead>
                                     <tr>
@@ -50,10 +46,12 @@
                                         <th scope="row">{{index + 1}}</th>
                                         <td>{{getFullName(user)}}</td>
                                         <td>
-                                            <div v-if="user.picture">
-                                                <img :src="user.picture.medium" alt="" />
-                                            </div>
-                                            <span v-else="user.picture">default avatar</span>
+                                            <img
+                                                v-if="user.picture"
+                                                :src="user.picture.medium"
+                                                alt=""
+                                            />
+                                            <span v-else>default avatar</span>
                                         </td>
                                     </tr>
                                 </tbody>
