@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>vue-1</title>
+    <meta charset="utf-8">
+    <meta name=viewport content="width=device-width">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+</head>
+
+<body>
+    <div id="root">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-md">
+                    <template v-if="shouldShownError">
+                        <div class="alert alert-danger" role="alert">
+                            {{errorMessage}}
+                        </div>
+                    </template>
+                    <template v-if="isLoading">
+                        <div class="progress">
+                            <div
+                                class="progress-bar progress-bar-striped progress-bar-animated"
+                                role="progressbar"
+                                aria-valuenow="100"
+                                aria-valuemin="0"
+                                aria-valuemax="100"
+                                style="width: 100%"
+                            ></div>
+                        </div>
+                    </template>
+                
+                    <template v-if="shouldShownUsers">
+                        <p class="lead">all users: <strong>{{countAllUsers}}</strong></p>
+                        <p class="lead">search users: <strong>{{countFoundUsers}}</strong></p>
+                        <input type="text" v-model="queryUser" />
+
+                        <div v-if="allUsersVisible && hasFoundUsers">
+                            <table class="table table-sm">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">#</th>
+                                        <th scope="col">Name</th>
+                                        <th scope="col">Avatar</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr v-for="(user, index) in foundUsers" :key="user.cell">
+                                        <th scope="row">{{index + 1}}</th>
+                                        <td>{{getFullName(user)}}</td>
+                                        <td>
+                                            <div v-if="user.picture">
+                                                <img :src="user.picture.medium" alt="" />
+                                            </div>
+                                            <span v-else="user.picture">default avatar</span>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <button
+                            @click="toggleUsers"
+                            type="button"
+                            class="btn btn-outline-secondary"
+                        >toggle users</button>
+            
+                    </template>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="./app.js" async></script>
+</body>
+
+</html>

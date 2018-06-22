@@ -1,0 +1,6 @@
+/node_modules
+*.log
+/dist
+/.idea
+.awcache
+/public/app.js
