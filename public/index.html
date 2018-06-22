@@ -44,7 +44,13 @@
                                 <tbody>
                                     <tr v-for="(user, index) in foundUsers" :key="user.cell">
                                         <th scope="row">{{index + 1}}</th>
-                                        <td>{{getFullName(user)}}</td>
+                                        <td>
+                                            <span
+                                                style="border-bottom:1px dotted;cursor:pointer"
+                                                v-copy="getFullName(user)"
+                                                v-copy:callback="copyToClipboard"
+                                            >{{getFullName(user)}}</span>
+                                        </td>
                                         <td>
                                             <img
                                                 v-if="user.picture"

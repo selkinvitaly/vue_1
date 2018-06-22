@@ -6,6 +6,8 @@ import { getUsers } from './services/get-users';
 import { logVersion } from './utils/log';
 import { LoadingStatus, User } from './models/users';
 
+const Copy = require('v-copy');
+
 ES6Promise.polyfill();
 
 
@@ -39,6 +41,8 @@ interface AppComputedProps {
     shouldShownUsers: boolean;
     shouldShownError: boolean;
 }
+
+Vue.use(Copy.default);
 
 
 (window as ExtWindow).app = new Vue<AppData, AppMethods, AppComputedProps>({
@@ -107,6 +111,9 @@ interface AppComputedProps {
         },
         toggleUsers: function() {
             this.allUsersVisible = !this.allUsersVisible;
+        },
+        copyToClipboard: function(text: string) {
+            alert(`Copied: "${text}"`);
         }
     }
 });
