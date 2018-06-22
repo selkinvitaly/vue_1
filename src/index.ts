@@ -6,7 +6,8 @@ import { getUsers } from './services/get-users';
 import { logVersion } from './utils/log';
 import { LoadingStatus, User } from './models/users';
 
-const Copy = require('v-copy');
+const VCopy = require('v-copy');
+const VTooltip = require('v-tooltip');
 
 ES6Promise.polyfill();
 
@@ -42,7 +43,8 @@ interface AppComputedProps {
     shouldShownError: boolean;
 }
 
-Vue.use(Copy.default);
+Vue.use(VCopy.default);
+Vue.use(VTooltip.default);
 
 
 (window as ExtWindow).app = new Vue<AppData, AppMethods, AppComputedProps>({

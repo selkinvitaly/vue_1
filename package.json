@@ -31,6 +31,7 @@
     "es6-promise": "4.2.4",
     "lodash": "4.17.10",
     "v-copy": "0.1.0",
+    "v-tooltip": "2.0.0-rc.33",
     "vue": "2.5.16",
     "whatwg-fetch": "2.0.4"
   }

@@ -7,7 +7,7 @@ export function getUsers(cnt: number): Promise<User[]> {
     return fetch(`https://randomuser.me/api/?results=${cnt}`)
         .then(res => res.json())
         .then(data => {
-            sometimesApiShouldFailed(20); // it just for testing error in UI
+            sometimesApiShouldFailed(10); // it just for testing error in UI
             return data.results;
         })
         .then(users => setDefaultAvatarForRandomUser(users)) // emulating not-existed avatar
